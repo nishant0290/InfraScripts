@@ -1,0 +1,5 @@
+<#
+Get-ADUser : The server has returned the following error: invalid enumeration context.
+#>
+
+Get-ADUser -filter * -Properties name | ForEach-Object { Get-ADUser -Identity $_ -Properties * | select name,ObjectClass,SamAccountName,DisplayName,GivenName,UserPrincipalName, pwdLastSet,badPwdCount, LastLogonDate, LockedOut | export-csv c:\temp\All-objects.csv -Append -NoTypeInformation}
