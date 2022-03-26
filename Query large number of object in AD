@@ -1,9 +1,13 @@
 <#
-when querying large number of users in ad (say 100000 + ) usually query fails with below error
+when querying large number of users / computers in ad (say 100000 + ) usually query fails with below error
 Get-ADUser : The server has returned the following error: invalid enumeration context.
 a workaround -
 #>
 
+
+# to query users -  
 $users = Get-ADUser -filter 'ObjectClass -eq "user"'  
 $users | ForEach-Object { "Working on $_"  ; Get-ADUser -Identity $_ -Properties * | select name,ObjectClass,SamAccountName,DisplayName,GivenName,UserPrincipalName, pwdLastSet,badPwdCount, LastLogonDate, LockedOut | `
 export-csv c:\temp\user.csv -Append -NoTypeInformation}
+
+
