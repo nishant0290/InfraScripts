@@ -1,0 +1,30 @@
+
+
+
+
+cls
+$servers =  get-content c:\temp\all-computers.txt
+$result = $null
+$result = @()
+foreach ($server in $servers) {
+write-host -ForegroundColor Yellow  "Working on Server - $server"
+$members1 = Invoke-Command -ComputerName $server -ScriptBlock{
+   $members = Invoke-Expression -command "Net Localgroup Administrators"
+   $members[6..($members.Length-3)]
+}
+$names = $null
+$names = @()
+foreach ($m in $members1) {
+
+$Properties = [ordered]@{
+servername = $a
+members = $m
+
+}
+$properties
+
+ 
+$result += New-Object psobject -Property $Properties
+}
+}
+$result
