@@ -1,4 +1,8 @@
+<#
 
+This script will query all the machines in a given sheet and will gather the list of members in the local administrator group
+
+#>
 
 
 
